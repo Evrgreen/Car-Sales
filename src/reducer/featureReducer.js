@@ -34,6 +34,19 @@ export const featureReducer = (state = initialState, action) => {
         }
       };
     }
+    case "REMOVE_ITEM": {
+      const [selectedFeature] = additionalFeatures.filter(
+        (item) => item.id == action.payload
+      );
+      return {
+        ...state,
+        additionalPrice: (additionalPrice -= selectedFeature.price),
+        car: {
+          ...car,
+          features: [...car.features.filter((item) => item !== selectedFeature)]
+        }
+      };
+    }
   }
   return state;
 };
