@@ -1,14 +1,16 @@
 import React from "react";
-import connect from "react-redux";
+import { connect } from "react-redux";
 
 import { addItem } from "./actions";
 
-const AdditionalFeature = (props) => {
+const AdditionalFeature = ({ feature, addItem }) => {
   return (
     <li>
       {/* Add an onClick that will let you add a feature to your car */}
-      <button className="button">Add</button>
-      {props.feature.name} (+{props.feature.price})
+      <button onClick={() => addItem(feature.id)} className="button">
+        Add
+      </button>
+      {feature.name} (+{feature.price})
     </li>
   );
 };

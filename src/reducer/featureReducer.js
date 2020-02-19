@@ -16,15 +16,22 @@ const initialState = {
 };
 
 export const featureReducer = (state = initialState, action) => {
+  let { car, additionalPrice, additionalFeatures } = state;
+  const { type, payload } = action;
   console.log({ state, action });
-  switch (action.type) {
+  console.log(payload);
+  switch (type) {
     case "ADD_ITEM": {
-      const selectedFeature = state.additionalFeatures.filter(
-        (item) => item.id == payload.id
+      const [selectedFeature] = additionalFeatures.filter(
+        (item) => item.id == action.payload
       );
       return {
         ...state,
-        car: { ...car, features: [...features, additionalFeatures] }
+        additionalPrice: (additionalPrice += selectedFeature.price),
+        car: {
+          ...car,
+          features: [...car.features, selectedFeature]
+        }
       };
     }
   }
