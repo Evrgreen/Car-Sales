@@ -1,13 +1,20 @@
-import React from 'react';
+import React from "react";
 
-const AddedFeature = props => {
+import { connect } from "react-redux";
+import { removeItem } from "./actions";
+const AddedFeature = ({ feature, removeItem }) => {
   return (
     <li>
-      {/* Add an onClick to run a function to remove a feature */}
-      <button className="button">X</button>
-      {props.feature.name}
+      <button onClick={() => removeItem(feature.id)} className="button">
+        X
+      </button>
+      {feature.name}
     </li>
   );
 };
 
-export default AddedFeature;
+const mDTP = {
+  removeItem
+};
+
+export default connect(null, mDTP)(AddedFeature);
